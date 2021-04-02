@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
+    'giftme.apps.GiftmeConfig',
     'rest_framework',
     'djoser',
     'drf_yasg',
