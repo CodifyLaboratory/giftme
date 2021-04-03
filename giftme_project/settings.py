@@ -1,4 +1,5 @@
 from pathlib import Path
+import datetime
 
 from decouple import config, Csv
 
@@ -154,3 +155,9 @@ JET_THEMES = [
         'title': 'Light Gray'
     }
 ]
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=700),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=700),
+}
