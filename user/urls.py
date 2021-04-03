@@ -8,5 +8,5 @@ urlpatterns = [
 
     path('users/', UserViewSet.as_view({'get': 'list'})),
     path('users/<int:pk>', UserViewSet.as_view({'get': 'retrieve'})),
-
+    path('users/edit/<int:pk>', UserViewSet.as_view({'get': 'retrieve','put': 'update'})),
 ]

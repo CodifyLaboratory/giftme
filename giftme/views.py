@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
-from .serializers import HolidayListSerializer, WishListSerializer
-from .models import Holiday, Wish
+from .serializers import HolidayListSerializer, WishListSerializer, BookingSerializer
+from .models import Holiday, Wish, Booking
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
@@ -43,4 +43,26 @@ class OwnWishViewSet(ReadOnlyModelViewSet):
 
     def get_queryset(self):
         queryset = Wish.objects.filter(user=self.request.user)
+        return queryset
+
+
+class BookingViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = BookingSerializer
+
+    def get_queryset(self):
+        queryset = Booking.objects.filter(wish_id=self.kwargs["pk"])
+        return queryset
+
+    def perform_create(self, serializer):
+        wish = Wish.objects.get(id=self.kwargs['pk'])
+        return serializer.save(user=self.request.user, wish=wish)
+
+
+class OwnBookingViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = BookingSerializer
+
+    def get_queryset(self):
+        queryset = Booking.objects.filter(user=self.request.user, status=True)
         return queryset

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HolidayViewSet, WishViewSet
+from .views import HolidayViewSet, WishViewSet, BookingViewSet, OwnBookingViewSet
 
 urlpatterns = [
     path('holidays/', HolidayViewSet.as_view({'get': 'list'})),
@@ -16,4 +16,11 @@ urlpatterns = [
 
     path('own-wishes/', WishViewSet.as_view({'get': 'list'})),
     path('own-holidays/', HolidayViewSet.as_view({'get': 'list'})),
+    path('own-bookings/', OwnBookingViewSet.as_view({'get': 'list'})),
+
+    path('booking/create/<int:pk>', BookingViewSet.as_view({'post': 'create'})),
+    path('booking/edit/<int:pk>', BookingViewSet.as_view({'get': 'retrieve', 'put': 'update'})),
+    path('booking/delete/<int:pk>', BookingViewSet.as_view({'get': 'retrieve', 'delete': 'destroy'})),
+    path('booking/<int:pk>', BookingViewSet.as_view({'get': 'retrieve'})),
+
 ]
