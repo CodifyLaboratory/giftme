@@ -1,5 +1,6 @@
 from pathlib import Path
 import datetime
+import os
 
 from decouple import config, Csv
 
@@ -9,7 +10,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '167.99.46.0']
 
 INSTALLED_APPS = [
     'jet.dashboard',
@@ -25,6 +26,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'drf_yasg',
+    'corsheaders',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -43,6 +45,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'giftme_project.urls'
@@ -117,6 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 JET_CHANGE_FORM_SIBLING_LINKS = True
 JET_SIDE_MENU_COMPACT = True
@@ -161,3 +165,30 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=700),
 }
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8080',
+    'http://127.0.0.1:9000'
+    'http://167.99.46.0',
+]
