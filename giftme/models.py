@@ -5,7 +5,8 @@ from django.contrib.auth import settings
 
 class Holiday(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название')
-    date = models.DateField(null=True, blank=True, verbose_name='Дата')
+    day = models.PositiveIntegerField(default=1, verbose_name='Число')
+    month = models.CharField(default='Январь', max_length=250, verbose_name='Месяц')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='holidays', verbose_name='Пользователь')
 
     def __str__(self):

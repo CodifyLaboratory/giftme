@@ -5,7 +5,7 @@ from .models import Holiday, Wish, Booking
 class HolidayListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Holiday
-        fields = ['id', 'name', 'date', 'user']
+        fields = ['id', 'name', 'day', 'month', 'user']
         read_only_fields = ['user']
 
 
@@ -31,6 +31,6 @@ class WishListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Wish
-        fields = ['id', 'name', 'description', 'image', 'link', 'holiday', 'user', 'bookings']
+        fields = ['id', 'name', 'description', 'image', 'link', 'holiday', 'user']
         read_only_fields = ['user']
 
