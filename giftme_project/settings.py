@@ -10,7 +10,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '167.99.46.0']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '167.99.46.0', 'giftme.site', 'www.giftme.site']
 
 INSTALLED_APPS = [
     'jet.dashboard',
@@ -121,6 +121,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 JET_CHANGE_FORM_SIBLING_LINKS = True
 JET_SIDE_MENU_COMPACT = True
 
@@ -163,7 +166,6 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=50),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=50),
 }
-
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_CREDENTIALS = True
