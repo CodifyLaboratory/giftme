@@ -1,7 +1,7 @@
 from pathlib import Path
 import datetime
 import os
-from datetime  import timedelta
+from datetime import timedelta
 from decouple import config, Csv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'giftme.apps.GiftmeConfig',
     'rest_framework',
+    'drf_multiple_model',
     'djoser',
     'drf_yasg',
     'corsheaders',
