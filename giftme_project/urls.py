@@ -8,8 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('jet/', include('jet.urls', 'jet')),
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
-    path('', include('user.urls')),
-    path('', include('giftme.urls')),
+    path('api/', include('user.urls')),
+    path('api/', include('giftme.urls')),
 ]
 urlpatterns += doc_urls
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
