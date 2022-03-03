@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from giftme.models import User
 from .models import Holiday, Wish, Booking
 
 
@@ -24,6 +25,13 @@ class BookingSerializer(serializers.ModelSerializer):
             defaults={'status': validated_data.get('status')}
         )
         return status
+
+
+class UserListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'first_name', 'last_name']
+        read_only_fields = ['email']
 
 
 class WishListSerializer(serializers.ModelSerializer):

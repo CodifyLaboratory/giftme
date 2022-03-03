@@ -1,6 +1,8 @@
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
-from .serializers import HolidayListSerializer, WishListSerializer, BookingSerializer
+from drf_multiple_model.viewsets import ObjectMultipleModelAPIViewSet
+from .serializers import HolidayListSerializer, WishListSerializer, UserListSerializer, BookingSerializer
 from .models import Holiday, Wish, Booking
+from giftme.models import User
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
@@ -44,6 +46,17 @@ class OwnWishViewSet(ReadOnlyModelViewSet):
     def get_queryset(self):
         queryset = Wish.objects.filter(user=self.request.user)
         return queryset
+
+
+class ShareWishViewSet(ObjectMultipleModelAPIViewSet):
+    permission_classes = [AllowAny]
+
+    def get_querylist(self):
+        querylist = [
+            {'queryset': User.objects.filter(id=self.kwargs['pk']), 'serializer_class': UserListSerializer},
+            {'queryset': Wish.objects.filter(user=self.kwargs['pk']), 'serializer_class': WishListSerializer}
+        ]
+        return querylist
 
 
 class BookingViewSet(ModelViewSet):
